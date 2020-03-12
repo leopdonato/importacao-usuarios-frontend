@@ -1,0 +1,68 @@
+nb-layout-header {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nb-card-footer,
+nb-card-header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+nb-alert {
+    margin-bottom: 0;
+}
+
+button+nb-alert {
+    margin-top: 15px;
+}
+
+nb-card-body {
+    display: flex;
+}
+
+@media(min-width:600px) {
+    nb-card-body {
+        align-items: stretch;
+    }
+    input+button {
+        margin-left: 7px;
+    }
+}
+
+@media(max-width:599px) {
+    nb-card-body {
+        flex-direction: column;
+    }
+    input+button {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+
+nb-icon {
+    outline: 0;
+    margin-right: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="text"] {
+    text-align: center;
+}
+
+
+/*botão cancelar template confirmação*/
+
+button:nth-of-type(2) {
+    margin-top: 12px;
+}
+
+p {
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: auto;
+}

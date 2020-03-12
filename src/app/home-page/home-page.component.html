@@ -1,0 +1,40 @@
+<nb-layout>
+    <nb-layout-header fixed>
+        <nb-icon icon="people-outline" status="dark"></nb-icon>
+        Importação de usuários</nb-layout-header>
+    <nb-layout-column>
+        <ng-container *ngIf="!changeTemplate; else confirmacao">
+            <form [formGroup]="formArqUsuario" (ngSubmit)="enviarArquivo()">
+                <nb-card>
+                    <nb-card-header>
+                        <nb-alert accent="basic">Submissão de usuários</nb-alert>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <input id="mostraArquivo" type="text" nbInput fullWidth shape="semi-round" disabled [(ngModel)]="arquivoSelecionado" [ngModelOptions]="{standalone: true}">
+                        <input #addArquivo id="addArquivo" type="file" accept=".xlsx,.xls,.csv" nbInput fullWidth status="info" shape="semi-round" formControlName="arquivo" (change)="$event.target.files.length > 0 ? arquivoSelecionado = $event.target.files[0].name : arquivoSelecionado = ''; guardarArquivo($event.target.files[0])">
+                        <button type="button" hero nbButton (click)="addArquivo.click()">Anexar arquivo .xls ou .csv</button>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <button type="submit" [disabled]="formArqUsuario.invalid || loading" hero nbButton status="primary" [nbSpinner]="loading" nbSpinnerStatus="info">Enviar arquivo</button>
+                        <nb-alert *ngIf="error" status="danger">Não foi possível concluir a ação no momento, por favor, tente novamente mais tarde!</nb-alert>
+                    </nb-card-footer>
+                </nb-card>
+            </form>
+        </ng-container>
+        <ng-template #confirmacao>
+            <nb-card>
+                <nb-card-header>
+                    <nb-alert accent="success">Seus dados foram validados com sucesso!</nb-alert>
+                </nb-card-header>
+                <nb-card-body>
+                    <p>Deseja prosseguir com a submissão dos usuários?</p>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="button" [disabled]="loading" hero nbButton status="primary" [nbSpinner]="loading" nbSpinnerStatus="info" (click)="confirmarArquivo()">Confirmar</button>
+                    <button type="button" outline nbButton status="danger" (click)="cancelar()">Cancelar</button>
+                    <nb-alert *ngIf="error" status="warning">Ops! Não foi possível prosseguir com a confirmação! Por favor, refaça a operação!</nb-alert>
+                </nb-card-footer>
+            </nb-card>
+        </ng-template>
+    </nb-layout-column>
+</nb-layout>

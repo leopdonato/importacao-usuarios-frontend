@@ -1,0 +1,29 @@
+<nb-layout>
+    <nb-layout-header fixed>
+        <nb-icon icon="arrow-back-outline" status="dark" [options]="{ animation: { type: 'zoom' } }" [routerLink]="['/home']"></nb-icon>
+        IMPORTAÇÃO DE USUÁRIOS</nb-layout-header>
+    <nb-layout-column [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+        <ng-container *ngIf="!loading">
+            <nb-alert *ngIf="isNotEmpty" outline="success">Sucesso! Seus dados foram submetidos!</nb-alert>
+            <ng-container *ngIf="isNotEmpty; else empty">
+                <div class="alinha-alert">
+                    <nb-alert status="success">
+                        {{feedback.inserido}} registros inseridos
+                    </nb-alert>
+                    <nb-alert status="info">
+                        {{feedback.alterado}} registros atualizados
+                    </nb-alert>
+                    <nb-alert status="warning">
+                        {{feedback.ignorado}} registros ignorados
+                    </nb-alert>
+                    <nb-alert status="danger">
+                        {{feedback.falha}} registros com falhas
+                    </nb-alert>
+                </div>
+            </ng-container>
+            <ng-template #empty>
+                <nb-alert status="danger"> Ops! Não há registros para serem processados.</nb-alert>
+            </ng-template>
+        </ng-container>
+    </nb-layout-column>
+</nb-layout>
